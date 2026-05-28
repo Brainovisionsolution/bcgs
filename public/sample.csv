@@ -1,0 +1,4 @@
+name,email,gender,college,course,program_type,duration,start_date,end_date,role,internship_id
+John Doe,johndoe@example.com,MALE,XYZ College,B.Tech,Internship,3 Months,2023-01-01,2023-04-01,Developer,BRV-INT-001
+Jane Smith,janesmith@example.com,FEMALE,ABC University,BCA,Training,6 Months,2023-02-01,2023-08-01,Designer,BRV-TRN-002
+Alex Doe,alexdoe@example.com,NEUTRAL,123 Institute,B.Sc,Bootcamp,1 Month,2023-03-01,2023-04-01,Analyst,BRV-BTC-003
