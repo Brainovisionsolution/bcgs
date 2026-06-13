@@ -37,7 +37,7 @@ export default function TemplatesPage() {
   const fetchTemplates = async () => {
     try {
       const token = localStorage.getItem('token');
-      const res = await axios.get('http://localhost:5000/api/admin/templates', {
+      const res = await axios.get('https://api-bcgs.brainovision.in/api/admin/templates', {
         headers: { Authorization: `Bearer ${token}` }
       });
       setTemplates(res.data);
@@ -49,7 +49,7 @@ export default function TemplatesPage() {
   const handleSetDefault = async (id: number, type: 'certificate' | 'offer_letter') => {
     try {
       const token = localStorage.getItem('token');
-      await axios.post(`http://localhost:5000/api/admin/templates/${id}/set-default`, { type }, {
+      await axios.post(`https://api-bcgs.brainovision.in/api/admin/templates/${id}/set-default`, { type }, {
         headers: { Authorization: `Bearer ${token}` }
       });
       alert(`Template set as default for ${type === 'certificate' ? 'Certificates' : 'Offer Letters'}`);
@@ -63,7 +63,7 @@ export default function TemplatesPage() {
     if (!confirm('Are you sure you want to delete this template?')) return;
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`http://localhost:5000/api/admin/templates/${id}`, {
+      await axios.delete(`https://api-bcgs.brainovision.in/api/admin/templates/${id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       fetchTemplates();
@@ -176,7 +176,7 @@ export default function TemplatesPage() {
     try {
       const token = localStorage.getItem('token');
       if (editingTemplateId) {
-        await axios.put(`http://localhost:5000/api/admin/templates/${editingTemplateId}`, formData, {
+        await axios.put(`https://api-bcgs.brainovision.in/api/admin/templates/${editingTemplateId}`, formData, {
           headers: { 
             Authorization: `Bearer ${token}`,
             'Content-Type': 'multipart/form-data'
@@ -184,7 +184,7 @@ export default function TemplatesPage() {
         });
         alert('Template updated successfully!');
       } else {
-        await axios.post('http://localhost:5000/api/admin/templates', formData, {
+        await axios.post('https://api-bcgs.brainovision.in/api/admin/templates', formData, {
           headers: { 
             Authorization: `Bearer ${token}`,
             'Content-Type': 'multipart/form-data'
@@ -421,7 +421,7 @@ export default function TemplatesPage() {
                     style={{
                       width: orientation === 'PORTRAIT' ? '794px' : '1123px',
                       minHeight: orientation === 'PORTRAIT' ? '1123px' : '794px',
-                      backgroundImage: background ? `url(${URL.createObjectURL(background)})` : (existingBackgroundUrl ? `url(${existingBackgroundUrl.startsWith('data:') ? existingBackgroundUrl : `http://localhost:5000${existingBackgroundUrl}`})` : 'none'),
+                      backgroundImage: background ? `url(${URL.createObjectURL(background)})` : (existingBackgroundUrl ? `url(${existingBackgroundUrl.startsWith('data:') ? existingBackgroundUrl : `https://api-bcgs.brainovision.in${existingBackgroundUrl}`})` : 'none'),
                       backgroundSize: '100% 100%',
                       backgroundColor: 'white'
                     }}
@@ -573,7 +573,7 @@ export default function TemplatesPage() {
                   <td className="px-6 py-4 font-mono">{t.template_id}</td>
                   <td className="px-6 py-4">
                     {t.background_image ? (
-                      <img src={t.background_image.startsWith('data:') ? t.background_image : `http://localhost:5000${t.background_image}`} alt={t.name} className="h-12 w-auto object-contain border border-slate-200" />
+                      <img src={t.background_image.startsWith('data:') ? t.background_image : `https://api-bcgs.brainovision.in${t.background_image}`} alt={t.name} className="h-12 w-auto object-contain border border-slate-200" />
                     ) : (
                       <span className="text-slate-400 text-xs">No image</span>
                     )}

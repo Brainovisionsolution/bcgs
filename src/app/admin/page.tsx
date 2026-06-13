@@ -31,7 +31,7 @@ export default function AdminDashboard() {
     try {
       const token = localStorage.getItem('token');
       if (!token) return router.push('/admin/login');
-      const res = await axios.get('http://localhost:5000/api/admin/certificates', {
+      const res = await axios.get('https://api-bcgs.brainovision.in/api/admin/certificates', {
         headers: { Authorization: `Bearer ${token}` }
       });
       setCerts(res.data);
@@ -44,7 +44,7 @@ export default function AdminDashboard() {
     try {
       const token = localStorage.getItem('token');
       if (!token) return;
-      const res = await axios.get('http://localhost:5000/api/admin/templates', {
+      const res = await axios.get('https://api-bcgs.brainovision.in/api/admin/templates', {
         headers: { Authorization: `Bearer ${token}` }
       });
       setTemplates(res.data);
@@ -113,7 +113,7 @@ export default function AdminDashboard() {
     if (selectedTemplate) formData.append('template_id', selectedTemplate);
     try {
       const token = localStorage.getItem('token');
-      const res = await axios.post('http://localhost:5000/api/admin/upload-bulk', formData, {
+      const res = await axios.post('https://api-bcgs.brainovision.in/api/admin/upload-bulk', formData, {
         headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'multipart/form-data' }
       });
       setFile(null); setBackground(null); setLogo(null);
@@ -130,7 +130,7 @@ export default function AdminDashboard() {
   const handleRevoke = async (id: number) => {
     try {
       const token = localStorage.getItem('token');
-      await axios.post(`http://localhost:5000/api/admin/certificates/${id}/revoke`, {}, {
+      await axios.post(`https://api-bcgs.brainovision.in/api/admin/certificates/${id}/revoke`, {}, {
         headers: { Authorization: `Bearer ${token}` }
       });
       fetchCerts();
@@ -141,7 +141,7 @@ export default function AdminDashboard() {
     if (!confirm("Are you sure you want to delete this certificate permanently?")) return;
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`http://localhost:5000/api/admin/certificates/${id}`, {
+      await axios.delete(`https://api-bcgs.brainovision.in/api/admin/certificates/${id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setSelectedCertIds(prev => prev.filter(x => x !== id));
@@ -169,7 +169,7 @@ export default function AdminDashboard() {
     setSendingCerts(true);
     try {
       const token = localStorage.getItem('token');
-      const res = await axios.post('http://localhost:5000/api/admin/certificates/send', { ids: selectedCertIds }, {
+      const res = await axios.post('https://api-bcgs.brainovision.in/api/admin/certificates/send', { ids: selectedCertIds }, {
         headers: { Authorization: `Bearer ${token}` }
       });
       const { sent, failed, errors } = res.data;
@@ -194,7 +194,7 @@ export default function AdminDashboard() {
     setDeletingCerts(true);
     try {
       const token = localStorage.getItem('token');
-      await axios.delete('http://localhost:5000/api/admin/certificates/bulk', {
+      await axios.delete('https://api-bcgs.brainovision.in/api/admin/certificates/bulk', {
         headers: { Authorization: `Bearer ${token}` },
         data: { ids: selectedCertIds }
       });
@@ -404,7 +404,7 @@ export default function AdminDashboard() {
                   </td>
                   <td className="px-6 py-4 text-right">
                     <div className="flex justify-end space-x-3 items-center">
-                      <a href={`http://localhost:5000/api/public/verify/${c.certificate_id}`} target="_blank" className="text-indigo-600 hover:text-indigo-800 font-medium">View</a>
+                      <a href={`https://api-bcgs.brainovision.in/api/public/verify/${c.certificate_id}`} target="_blank" className="text-indigo-600 hover:text-indigo-800 font-medium">View</a>
                       {c.status === 'VALID' && (
                         <button onClick={() => handleRevoke(c.id)} className="text-amber-600 hover:text-amber-800 font-medium">Revoke</button>
                       )}

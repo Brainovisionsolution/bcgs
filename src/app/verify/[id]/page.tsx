@@ -14,7 +14,7 @@ export default function VerifyPage() {
   useEffect(() => {
     const fetchVerification = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/api/public/verify/${id}`);
+        const res = await axios.get(`https://api-bcgs.brainovision.in/api/public/verify/${id}`);
         setData(res.data);
       } catch (err) {
         setError(true);
@@ -94,7 +94,7 @@ export default function VerifyPage() {
           {isValid && (
             <div className="flex flex-col sm:flex-row gap-4">
               <a 
-                href={`http://localhost:5000${data.pdf_url}`} 
+                href={`https://api-bcgs.brainovision.in${data.pdf_url}`} 
                 target="_blank"
                 download
                 className="flex-1 flex items-center justify-center space-x-2 bg-indigo-600 text-white py-3 rounded-xl font-semibold hover:bg-indigo-700 transition shadow-lg shadow-indigo-200"

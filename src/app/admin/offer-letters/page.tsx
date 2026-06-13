@@ -32,7 +32,7 @@ export default function OfferLettersDashboard() {
     try {
       const token = localStorage.getItem('token');
       if (!token) return router.push('/admin/login');
-      const res = await axios.get('http://localhost:5000/api/admin/offer-letters', {
+      const res = await axios.get('https://api-bcgs.brainovision.in/api/admin/offer-letters', {
         headers: { Authorization: `Bearer ${token}` }
       });
       setOffers(res.data);
@@ -45,7 +45,7 @@ export default function OfferLettersDashboard() {
     try {
       const token = localStorage.getItem('token');
       if (!token) return;
-      const res = await axios.get('http://localhost:5000/api/admin/templates', {
+      const res = await axios.get('https://api-bcgs.brainovision.in/api/admin/templates', {
         headers: { Authorization: `Bearer ${token}` }
       });
       setTemplates(res.data);
@@ -114,7 +114,7 @@ export default function OfferLettersDashboard() {
     if (selectedTemplate) formData.append('template_id', selectedTemplate);
     try {
       const token = localStorage.getItem('token');
-      const res = await axios.post('http://localhost:5000/api/admin/upload-bulk-offer-letters', formData, {
+      const res = await axios.post('https://api-bcgs.brainovision.in/api/admin/upload-bulk-offer-letters', formData, {
         headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'multipart/form-data' }
       });
       setFile(null); setBackground(null); setLogo(null);
@@ -137,7 +137,7 @@ export default function OfferLettersDashboard() {
   const handleRevoke = async (id: number) => {
     try {
       const token = localStorage.getItem('token');
-      await axios.post(`http://localhost:5000/api/admin/offer-letters/${id}/revoke`, {}, {
+      await axios.post(`https://api-bcgs.brainovision.in/api/admin/offer-letters/${id}/revoke`, {}, {
         headers: { Authorization: `Bearer ${token}` }
       });
       fetchOffers();
@@ -148,7 +148,7 @@ export default function OfferLettersDashboard() {
     if (!confirm("Are you sure you want to delete this offer letter permanently?")) return;
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`http://localhost:5000/api/admin/offer-letters/${id}`, {
+      await axios.delete(`https://api-bcgs.brainovision.in/api/admin/offer-letters/${id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setSelectedIds(prev => prev.filter(x => x !== id));
@@ -161,7 +161,7 @@ export default function OfferLettersDashboard() {
     setSending(true);
     try {
       const token = localStorage.getItem('token');
-      const res = await axios.post('http://localhost:5000/api/admin/offer-letters/send', { ids: selectedIds }, {
+      const res = await axios.post('https://api-bcgs.brainovision.in/api/admin/offer-letters/send', { ids: selectedIds }, {
         headers: { Authorization: `Bearer ${token}` }
       });
       const { sent, failed, errors } = res.data;
@@ -186,7 +186,7 @@ export default function OfferLettersDashboard() {
     setGeneratingCerts(true);
     try {
       const token = localStorage.getItem('token');
-      const res = await axios.post('http://localhost:5000/api/admin/offer-letters/generate-certificates', { ids: selectedIds }, {
+      const res = await axios.post('https://api-bcgs.brainovision.in/api/admin/offer-letters/generate-certificates', { ids: selectedIds }, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setSelectedIds([]);
@@ -204,7 +204,7 @@ export default function OfferLettersDashboard() {
     setDeleting(true);
     try {
       const token = localStorage.getItem('token');
-      await axios.delete('http://localhost:5000/api/admin/offer-letters/bulk', {
+      await axios.delete('https://api-bcgs.brainovision.in/api/admin/offer-letters/bulk', {
         headers: { Authorization: `Bearer ${token}` },
         data: { ids: selectedIds }
       });
@@ -440,7 +440,7 @@ export default function OfferLettersDashboard() {
                   </td>
                   <td className="px-6 py-4 text-right">
                     <div className="flex justify-end space-x-3 items-center">
-                      <a href={`http://localhost:5000/api/public/verify/${o.offer_id}`} target="_blank" className="text-indigo-600 hover:text-indigo-800 font-medium">View</a>
+                      <a href={`https://api-bcgs.brainovision.in/api/public/verify/${o.offer_id}`} target="_blank" className="text-indigo-600 hover:text-indigo-800 font-medium">View</a>
                       {o.status !== 'REVOKED' && (
                         <button onClick={() => handleRevoke(o.id)} className="text-amber-600 hover:text-amber-800 font-medium">Revoke</button>
                       )}

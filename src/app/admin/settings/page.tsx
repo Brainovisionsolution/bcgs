@@ -30,7 +30,7 @@ export default function SettingsPage() {
     setLoading(true);
     try {
       const token = localStorage.getItem('token');
-      await axios.post('http://localhost:5000/api/admin/reset-password', {
+      await axios.post('https://api-bcgs.brainovision.in/api/admin/reset-password', {
         oldPassword,
         newPassword
       }, {

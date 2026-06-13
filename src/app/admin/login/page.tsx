@@ -14,7 +14,7 @@ export default function LoginPage() {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:5000/api/admin/login', { email, password });
+      const res = await axios.post('https://api-bcgs.brainovision.in/api/admin/login', { email, password });
       if (res.data.token) {
         localStorage.setItem('token', res.data.token);
         router.push('/admin');
